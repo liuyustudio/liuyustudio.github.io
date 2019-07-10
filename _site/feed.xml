@@ -1,0 +1,1222 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-07-10T19:14:33+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">博客空间</title><subtitle>技术为主的博客空间</subtitle><entry><title type="html">High HDI Support for UI</title><link href="http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui.html" rel="alternate" type="text/html" title="High HDI Support for UI" /><published>2019-07-10T10:24:00+08:00</published><updated>2019-07-10T10:24:00+08:00</updated><id>http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui</id><content type="html" xml:base="http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui.html">&lt;p&gt;Linux 环境中（以 Ubuntu 为例）许多应用程序似乎还没准备好迎接 4k 或以上分辨率显示设备。
+当程序运行时，HDI 里应用程序用户界面中的字会变得其小无比。&lt;/p&gt;
+
+&lt;p&gt;针对这种现象，解决方案有两个：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;全局设定：在系统设定的显示设定页面中，将系统整体显示放大系数从 100% 调整到 200%&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;单独设定：通过命令行启动应用程序时，添加环境变量 GDK_SCALE=2，例如：&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 以 yEd 为例&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;GDK_SCALE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2 yEd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;此时，应用程序 UI ，包括字体，将以原来两倍的比例扩展开来显示。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以上两种方案各有利弊，使用过程中应根据实际情况酌情选择。&lt;/p&gt;</content><author><name></name></author><summary type="html">Linux 环境中（以 Ubuntu 为例）许多应用程序似乎还没准备好迎接 4k 或以上分辨率显示设备。 当程序运行时，HDI 里应用程序用户界面中的字会变得其小无比。</summary></entry><entry><title type="html">Ubuntu 16.04 ROS Install</title><link href="http://localhost:4000/ros/ubuntu/install/2019/07/09/ros-install.html" rel="alternate" type="text/html" title="Ubuntu 16.04 ROS Install" /><published>2019-07-09T11:51:16+08:00</published><updated>2019-07-09T11:51:16+08:00</updated><id>http://localhost:4000/ros/ubuntu/install/2019/07/09/ros-install</id><content type="html" xml:base="http://localhost:4000/ros/ubuntu/install/2019/07/09/ros-install.html">&lt;h1 id=&quot;ros&quot;&gt;ROS&lt;/h1&gt;
+
+&lt;p&gt;Robot Operating System Web Site: &lt;a href=&quot;http://www.ros.org&quot;&gt;http://www.ros.org&lt;/a&gt;&lt;/p&gt;
+
+&lt;!-- TOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-environment&quot;&gt;1. environment&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#11-install&quot;&gt;1.1. install&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#111-操作系统网络代理安装配置&quot;&gt;1.1.1. 操作系统、网络、代理安装、配置&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#112-ros-安装&quot;&gt;1.1.2. ROS 安装&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-tutorials&quot;&gt;2. Tutorials&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-installing-and-configuring-ros-environment&quot;&gt;2.1. Installing and Configuring ROS Environment&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#22-navigating-the-ros-filesystem&quot;&gt;2.2. Navigating the ROS Filesystem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#23-creating-a-ros-package&quot;&gt;2.3. Creating a ROS Package&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#24-building-a-ros-package&quot;&gt;2.4. Building a ROS Package&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#25-understanding-ros-nodes&quot;&gt;2.5. Understanding ROS Nodes&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#26-understanding-ros-topics&quot;&gt;2.6. Understanding ROS Topics&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#27-understanding-ros-services-and-parameters&quot;&gt;2.7. Understanding ROS Services and Parameters&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#28-using-rqt_console-and-roslaunch&quot;&gt;2.8. Using rqt_console and roslaunch&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#29-using-rosed-to-edit-files-in-ros&quot;&gt;2.9. Using rosed to edit files in ROS&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#210-creating-a-ros-msg-a&quot;&gt;2.10. Creating a ROS msg a&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#211-writing-a-simple-publisher-and-subscriber-c&quot;&gt;2.11. Writing a Simple Publisher and Subscriber (C++)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#212-writing-a-simple-publisher-and-subscriber-python&quot;&gt;2.12. Writing a Simple Publisher and Subscriber (Python)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#213-examining-the-simple-publisher-and-subscriber&quot;&gt;2.13. Examining the Simple Publisher and Subscriber&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#214-writing-a-simple-service-and-client-c&quot;&gt;2.14. Writing a Simple Service and Client (C++)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#215-writing-a-simple-service-and-client-python&quot;&gt;2.15. Writing a Simple Service and Client (Python)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#216-examining-the-simple-service-and-client&quot;&gt;2.16. Examining the Simple Service and Client&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#217-recording-and-playing-back-data&quot;&gt;2.17. Recording and playing back data&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#218-getting-started-with-roswtf&quot;&gt;2.18. Getting started with roswtf&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#219-navigating-the-ros-wiki&quot;&gt;2.19. Navigating the ROS wiki&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /TOC --&gt;
+
+&lt;h2 id=&quot;1-environment&quot;&gt;1. environment&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-install&quot;&gt;1.1. install&lt;/h3&gt;
+
+&lt;p&gt;仅以 Ubuntu 为底层操作系统。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ROS 版本&lt;/th&gt;
+      &lt;th&gt;官方支持 Ubuntu 版本&lt;/th&gt;
+      &lt;th&gt;Installation Guide&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ROS Kinetic Kame&lt;/td&gt;
+      &lt;td&gt;Ubuntu Wily (15.10) and Ubuntu Xenial (16.04 LTS)&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://wiki.ros.org/kinetic/Installation/Ubuntu&quot;&gt;http://wiki.ros.org/kinetic/Installation/Ubuntu&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ROS Melodic Morenia&lt;/td&gt;
+      &lt;td&gt;Ubuntu Artful (17.10), Bionic (18.04 LTS) and Debian Stretch&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://wiki.ros.org/melodic/Installation/Ubuntu&quot;&gt;http://wiki.ros.org/melodic/Installation/Ubuntu&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;111-操作系统网络代理安装配置&quot;&gt;1.1.1. 操作系统、网络、代理安装、配置&lt;/h4&gt;
+
+&lt;p&gt;略&lt;/p&gt;
+
+&lt;h4 id=&quot;112-ros-安装&quot;&gt;1.1.2. ROS 安装&lt;/h4&gt;
+
+&lt;p&gt;以 Kenetic 版本为例&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;install ROS platform&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# setup sources list&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &amp;gt; /etc/apt/sources.list.d/ros-latest.list'&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# setup apt keys&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# available server:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   - hkp://keyserver.ubuntu.com:80&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   - hkp://pgp.mit.edu:80&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key adv &lt;span class=&quot;nt&quot;&gt;--keyserver&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hkp://keyserver.ubuntu.com:80'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--recv-key&lt;/span&gt; C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+&lt;span class=&quot;c&quot;&gt;# install&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#---------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Desktop-Full Install: (Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators and 2D/3D perception&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   sudo apt install ros-melodic-desktop-full&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#---------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Desktop Install: ROS, rqt, rviz, and robot-generic libraries&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   sudo apt install ros-melodic-desktop&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#---------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# ROS-Base: (Bare Bones) ROS package, build, and communication libraries. No GUI tools.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   sudo apt install ros-melodic-ros-base&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#---------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Individual Package&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   sudo apt install ros-melodic-PACKAGE&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# e.g.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   sudo apt install ros-melodic-slam-gmapping&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# To find available packages, use:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   apt search ros-melodic&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ros-melodic-desktop-full
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Initialize rosdep&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rosdep init
+rosdep update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ROS Environment Setup&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;source /opt/ros/kinetic/setup.bash&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.bashrc
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dependencies for building packages&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python-rosinstall python-rosinstall-generator python-wstool build-essential
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-tutorials&quot;&gt;2. Tutorials&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-installing-and-configuring-ros-environment&quot;&gt;2.1. Installing and Configuring ROS Environment&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment&quot;&gt;http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install ROS
+略&lt;/li&gt;
+  &lt;li&gt;Managing Your Environment
+略&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a ROS Workspace&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; ~/catkin_ws/src
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws/
+catkin_make
+
+&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;devel/setup.bash
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ROS_PACKAGE_PATH&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# /home/youruser/catkin_ws/src:/opt/ros/kinetic/share&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;22-navigating-the-ros-filesystem&quot;&gt;2.2. Navigating the ROS Filesystem&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/NavigatingTheFilesystem&quot;&gt;http://wiki.ros.org/ROS/Tutorials/NavigatingTheFilesystem&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;install ros-tutorials&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# sudo apt-get install ros-&amp;lt;distro&amp;gt;-ros-tutorials&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# &amp;lt;distro&amp;gt;: indigo, kinetic, lunar, etc.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ros-kinetic-ros-tutorials
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;23-creating-a-ros-package&quot;&gt;2.3. Creating a ROS Package&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/CreatingPackage&quot;&gt;http://wiki.ros.org/ROS/Tutorials/CreatingPackage&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;use the &lt;strong&gt;catkin_create_pkg&lt;/strong&gt; script to create a new package called ‘beginner_tutorials’ which depends on std_msgs, roscpp, and rospy:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws/src
+
+&lt;span class=&quot;c&quot;&gt;# catkin_create_pkg &amp;lt;package_name&amp;gt; [depend1] [depend2] [depend3]&lt;/span&gt;
+catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Building a catkin workspace and sourcing the setup file:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws
+
+catkin_make
+
+&lt;span class=&quot;c&quot;&gt;# To add the workspace to ROS environment&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/catkin_ws/devel/setup.bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Review &lt;strong&gt;first-order&lt;/strong&gt; dependencies via &lt;strong&gt;rospack&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rospack depends1 beginner_tutorials
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;list corresponding &lt;strong&gt;package.xml&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;package.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;package&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;format=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+...
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;buildtool_depend&amp;gt;&lt;/span&gt;catkin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/buildtool_depend&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;build_depend&amp;gt;&lt;/span&gt;roscpp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build_depend&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;build_depend&amp;gt;&lt;/span&gt;rospy&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build_depend&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;build_depend&amp;gt;&lt;/span&gt;std_msgs&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build_depend&amp;gt;&lt;/span&gt;
+...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/package&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;List indirect dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rospack depends beginner_tutorials
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;24-building-a-ros-package&quot;&gt;2.4. Building a ROS Package&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/BuildingPackages&quot;&gt;http://wiki.ros.org/ROS/Tutorials/BuildingPackages&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# import environment settings&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# source /opt/ros/%YOUR_ROS_DISTRO%/setup.bash&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# For Kinetic for instance&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; /opt/ros/kinetic/setup.bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;catkin_make combines the calls to cmake and make in the standard CMake workflow:&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# In a CMake project&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;build
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build
+cmake ..
+make
+make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# (optionally)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#===========================&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# In a catkin workspace&lt;/span&gt;
+catkin_make
+catkin_make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# (optionally)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;build in a different place:&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# In a catkin workspace&lt;/span&gt;
+catkin_make &lt;span class=&quot;nt&quot;&gt;--source&lt;/span&gt; my_src
+catkin_make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--source&lt;/span&gt; my_src  &lt;span class=&quot;c&quot;&gt;# (optionally)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;25-understanding-ros-nodes&quot;&gt;2.5. Understanding ROS Nodes&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes&quot;&gt;http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;roscore&lt;/li&gt;
+  &lt;li&gt;rosnode
+    &lt;ul&gt;
+      &lt;li&gt;rosnode list&lt;/li&gt;
+      &lt;li&gt;rosnode info /rosout&lt;/li&gt;
+      &lt;li&gt;rosnode ping my_turtle&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rosrun
+    &lt;ul&gt;
+      &lt;li&gt;rosrun turtlesim turtlesim_node&lt;/li&gt;
+      &lt;li&gt;rosrun turtlesim turtlesim_node __name:=my_turtle&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rosnode
+    &lt;ul&gt;
+      &lt;li&gt;rosnode cleanup&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;26-understanding-ros-topics&quot;&gt;2.6. Understanding ROS Topics&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics&quot;&gt;http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;start roscore&lt;/li&gt;
+  &lt;li&gt;turtlesim
+    &lt;ul&gt;
+      &lt;li&gt;start turtlesim
+rosrun turtlesim turtlesim_node&lt;/li&gt;
+      &lt;li&gt;turtle keyboard teleoperation
+rosrun turtlesim turtle_teleop_key&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;rostopic&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;cmd&lt;/th&gt;
+          &lt;th&gt;desc&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;rostopic bw&lt;/td&gt;
+          &lt;td&gt;display bandwidth used by topic&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;rostopic echo&lt;/td&gt;
+          &lt;td&gt;print messages to screen&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;rostopic hz&lt;/td&gt;
+          &lt;td&gt;display publishing rate of topic&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;rostopic list&lt;/td&gt;
+          &lt;td&gt;print information about active topics&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;rostopic pub&lt;/td&gt;
+          &lt;td&gt;publish data to topic&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;rostopic type&lt;/td&gt;
+          &lt;td&gt;print topic type&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;rostopic echo /turtle1/cmd_vel&lt;/li&gt;
+      &lt;li&gt;rostopic list -v&lt;/li&gt;
+      &lt;li&gt;rostopic type
+        &lt;ul&gt;
+          &lt;li&gt;rostopic type /turtle1/cmd_vel&lt;/li&gt;
+          &lt;li&gt;rosmsg show geometry_msgs/Twist&lt;/li&gt;
+          &lt;li&gt;
+            &lt;table&gt;
+              &lt;tbody&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;rostopic type /turtle1/cmd_vel&lt;/td&gt;
+                  &lt;td&gt;rosmsg show&lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;rostopic pub
+        &lt;ul&gt;
+          &lt;li&gt;rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist – ‘[2.0, 0.0, 0.0]’ ‘[0.0, 0.0, 1.8]’&lt;/li&gt;
+          &lt;li&gt;rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 – ‘[2.0, 0.0, 0.0]’ ‘[0.0, 0.0, -1.8]’&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;rostopic echo /turtle1/pose&lt;/li&gt;
+      &lt;li&gt;rostopic hz
+        &lt;ul&gt;
+          &lt;li&gt;rostopic hz /turtle1/pose&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;rosrun rqt_plot rqt_plot&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;27-understanding-ros-services-and-parameters&quot;&gt;2.7. Understanding ROS Services and Parameters&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams&quot;&gt;http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;rosservice
+    &lt;ul&gt;
+      &lt;li&gt;rosservice
+cmd | desc
+—|—
+rosservice list | print information about active services
+rosservice call | call the service with the provided args
+rosservice type | print service type
+rosservice find | find services by service type
+rosservice uri  | print service ROSRPC uri&lt;/li&gt;
+      &lt;li&gt;rosservice list&lt;/li&gt;
+      &lt;li&gt;rosservice type [service]
+rosservice type /clear
+rosservice type /spawn | rossrv show&lt;/li&gt;
+      &lt;li&gt;rosservice call [service] [args]
+rosservice call /clear
+rosservice call /spawn 2 2 0.2 “”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rosparam
+    &lt;ul&gt;
+      &lt;li&gt;rosparam
+cmd | desc
+—|—
+rosparam set    | set parameter
+rosparam get    | get parameter
+rosparam load   | load parameters from file
+rosparam dump   | dump parameters to file
+rosparam delete | delete parameter
+rosparam list   | list parameter names&lt;/li&gt;
+      &lt;li&gt;rosparam list&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;rosparam set [param_name]&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;rosparam set /background_r 150
+rosservice call /clear
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;rosparam get [param_name]&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;rosparam get /background_g
+rosparam get /
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;rosparam dump [file_name] [namespace]&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;rosparam dump params.yaml
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;rosparam load [file_name] [namespace]&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;rosparam load params.yaml copy
+rosparam get /copy/background_b
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;28-using-rqt_console-and-roslaunch&quot;&gt;2.8. Using rqt_console and roslaunch&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch&quot;&gt;http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;test rqt_console and ros logger system&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rosrun rqt_console rqt_console
+rosrun rqt_logger_level rqt_logger_level
+
+rosrun turtlesim turtlesim_node
+rostopic pub /turtle1/cmd_vel geometry_msgs/Twist &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;using roslaunch&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws
+&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;devel/setup.bash
+roscd beginner_tutorials
+
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;launch
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;launch
+
+vi turtlemimic.launch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;NOTE: The directory to store launch files doesn’t necessarily have to be named launch. In fact you don’t even need to store them in a directory. roslaunch command automatically looks into the passed package and detects available launch files. However, this is considered good practice.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;launch&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;group&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pkg=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sim&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim_node&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/group&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;group&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pkg=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sim&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim_node&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/group&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pkg=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mimic&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mimic&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;remap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;from=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;input&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;to=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim1/turtle1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;remap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;from=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;to=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;turtlesim2/turtle1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/node&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/launch&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;test roslaunching&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roslaunch beginner_tutorials turtlemimic.launch
+
+rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'[2.0, 0.0, 0.0]'&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'[0.0, 0.0, -1.8]'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;29-using-rosed-to-edit-files-in-ros&quot;&gt;2.9. Using rosed to edit files in ROS&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/UsingRosEd&quot;&gt;http://wiki.ros.org/ROS/Tutorials/UsingRosEd&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;rosed [package_name] [filename]
+    &lt;ul&gt;
+      &lt;li&gt;rosed roscpp Logger.msg&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;change default editor of rosed
+    &lt;ul&gt;
+      &lt;li&gt;export EDITOR=’nano -w’&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;210-creating-a-ros-msg-a&quot;&gt;2.10. Creating a ROS msg a&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv&quot;&gt;http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Brief&lt;/p&gt;
+
+    &lt;p&gt;msg files are stored in the &lt;strong&gt;msg&lt;/strong&gt; directory of a package, and srv files are stored in the &lt;strong&gt;srv&lt;/strong&gt; directory.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;msg&lt;/p&gt;
+
+        &lt;p&gt;msg files are simple text files that describe the fields of a ROS message. They are used to generate source code for messages in different languages.&lt;/p&gt;
+
+        &lt;p&gt;msgs are just simple text files with a field type and field name per line. field type:&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;int8, int16, int32, int64 (plus uint*)&lt;/li&gt;
+          &lt;li&gt;float32, float64&lt;/li&gt;
+          &lt;li&gt;string&lt;/li&gt;
+          &lt;li&gt;time, duration&lt;/li&gt;
+          &lt;li&gt;other msg files&lt;/li&gt;
+          &lt;li&gt;variable-length array[] and fixed-length array[C]&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;p&gt;There is also a special type in ROS: Header, the header contains a timestamp and coordinate frame information that are commonly used in ROS. You will frequently see the first line in a msg file have Header header.&lt;/p&gt;
+
+        &lt;p&gt;example:&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code class=&quot;language-msg&quot;&gt;Header header
+string child_frame_id
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;srv&lt;/p&gt;
+
+        &lt;p&gt;an srv file describes a service. It is composed of two parts: a request and a response.&lt;/p&gt;
+
+        &lt;p&gt;srv files are just like msg files, except they contain two parts: a request and a response. The two parts are separated by a ‘—’ line. Here is an example of a srv file:&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code class=&quot;language-srv&quot;&gt;int64 A
+int64 B
+---
+int64 Sum
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using msg&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;msg
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;int64 num&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; msg/Num.msg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Note that at build time, we need “message_generation”, while at runtime, we only need “message_runtime”.&lt;/p&gt;
+
+    &lt;p&gt;In package.xml:&lt;/p&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;build_depend&amp;gt;&lt;/span&gt;message_generation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build_depend&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;exec_depend&amp;gt;&lt;/span&gt;message_runtime&lt;span class=&quot;nt&quot;&gt;&amp;lt;/exec_depend&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Modify &lt;strong&gt;CMakeLists.txt&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Add message_generation to the list of COMPONENTS.
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;find_package(catkin&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;REQUIRED&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;COMPONENTS&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;roscpp&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;rospy&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;std_msgs&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;message_generation&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Also make sure you export the message runtime dependency.
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;catkin_package(&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;CATKIN_DEPENDS&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;message_runtime&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;...)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# add message filter
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;add_message_files(&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;FILES&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;Num.msg&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# enable generate_message() function
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;generate_messages(&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;DEPENDENCIES&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;std_msgs&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Use &lt;strong&gt;rosmsg&lt;/strong&gt; show message info:&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rosmsg show beginner_tutorials/Num
+&lt;span class=&quot;c&quot;&gt;# or&lt;/span&gt;
+rosmsg show Num
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using srv&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# create a srv&lt;/span&gt;
+roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;srv
+
+&lt;span class=&quot;c&quot;&gt;# copy an existing one from another package by roscp&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# roscp [package_name] [file_to_copy_path] [copy_path]&lt;/span&gt;
+roscp rospy_tutorials AddTwoInts.srv srv/AddTwoInts.srv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;In &lt;strong&gt;package.xml&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;build_depend&amp;gt;&lt;/span&gt;message_generation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build_depend&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;exec_depend&amp;gt;&lt;/span&gt;message_runtime&lt;span class=&quot;nt&quot;&gt;&amp;lt;/exec_depend&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;In &lt;strong&gt;CMakeLists.txt&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Add message_generation to the list of COMPONENTS.
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;find_package(catkin&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;REQUIRED&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;COMPONENTS&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;roscpp&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;rospy&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;std_msgs&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;message_generation&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Import service file - AddTwoInts.srv
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;add_service_files(&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;FILES&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;AddTwoInts.srv&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Use &lt;strong&gt;rossrv&lt;/strong&gt; show message info:&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rossrv show beginner_tutorials/AddTwoInts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Common step for msg and srv&lt;/p&gt;
+
+    &lt;p&gt;Changes in CMakeLists.txt:&lt;/p&gt;
+
+    &lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# add any packages you depend on which contain .msg files that your messages use like this:
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;generate_messages(&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;DEPENDENCIES&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;std_msgs&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;make our package again:&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ../..
+catkin_make &lt;span class=&quot;nb&quot;&gt;install
+cd&lt;/span&gt; -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Any .msg file in the msg directory will generate code for use in all supported languages:&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;language&lt;/th&gt;
+          &lt;th&gt;path&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;C++&lt;/td&gt;
+          &lt;td&gt;~/catkin_ws/devel/include/beginner_tutorials&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Python2&lt;/td&gt;
+          &lt;td&gt;~/catkin_ws/devel/lib/python2.7/dist-packages/beginner_tutorials/msg&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Lisp&lt;/td&gt;
+          &lt;td&gt;~/catkin_ws/devel/share/common-lisp/ros/beginner_tutorials/msg&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;Similarly, any .srv files in the srv directory will have generated code in supported languages.&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;language&lt;/th&gt;
+          &lt;th&gt;path&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;C++&lt;/td&gt;
+          &lt;td&gt;~/catkin_ws/devel/include/beginner_tutorials&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Python2&lt;/td&gt;
+          &lt;td&gt;~/catkin_ws/devel/lib/python2.7/dist-packages/beginner_tutorials/srv&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Lisp&lt;/td&gt;
+          &lt;td&gt;~/catkin_ws/devel/share/common-lisp/ros/beginner_tutorials/srv&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;211-writing-a-simple-publisher-and-subscriber-c&quot;&gt;2.11. Writing a Simple Publisher and Subscriber (C++)&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29&quot;&gt;http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; src
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;src/talker.cpp&lt;/p&gt;
+
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;ros/ros.h&quot;
+#include &quot;std_msgs/String.h&quot;
+&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;sstream&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;cpp_talker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NodeHandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Publisher&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chatter_pub&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advertise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std_msgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;topic_chatter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loop_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std_msgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;cpp-talker: hello world &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;ROS_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%s&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c_str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;chatter_pub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spinOnce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;loop_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;src/listener.cpp&lt;/p&gt;
+
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;ros/ros.h&quot;
+#include &quot;std_msgs/String.h&quot;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;chatterCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std_msgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ConstPtr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ROS_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cpp-listener: I heard: [%s]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c_str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;cpp_listener&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NodeHandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscriber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;topic_chatter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chatterCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CMakeLists.txt&lt;/p&gt;
+
+    &lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;cmake_minimum_required(VERSION&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;2.8.3)&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;project(beginner_tutorials)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Find catkin and any catkin packages
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;find_package(catkin&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;REQUIRED&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;COMPONENTS&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;roscpp&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;rospy&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;std_msgs&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;genmsg)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Declare ROS messages and services
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;add_message_files(DIRECTORY&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;FILES&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Num.msg)&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;add_service_files(DIRECTORY&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;srv&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;FILES&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;AddTwoInts.srv)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Generate added messages and services
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;generate_messages(DEPENDENCIES&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;std_msgs)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Declare a catkin package
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;catkin_package()&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;add_executable(talker&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;src/talker.cpp)&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;target_link_libraries(talker&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;${catkin_LIBRARIES})&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;add_dependencies(talker&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;beginner_tutorials_generate_messages_cpp)&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;add_executable(listener&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;src/listener.cpp)&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;target_link_libraries(listener&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;${catkin_LIBRARIES})&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;add_dependencies(listener&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;beginner_tutorials_generate_messages_cpp)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# build&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws
+catkin_make
+
+&lt;span class=&quot;c&quot;&gt;# start talker &amp;amp; listener via rosrun.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Should be started in different consoles.&lt;/span&gt;
+rosrun rosrun beginner_tutorials talker
+rosrun rosrun beginner_tutorials listener
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;212-writing-a-simple-publisher-and-subscriber-python&quot;&gt;2.12. Writing a Simple Publisher and Subscriber (Python)&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29&quot;&gt;http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; scripts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;scripts/talker.py&lt;/p&gt;
+
+    &lt;div class=&quot;language-py highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rospy&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;std_msgs.msg&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;talker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Publisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'topic_chatter-py'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queue_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'python_talker'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;anonymous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 10hz
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_shutdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;hello_str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;python talker: hello world &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loginfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello_str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;pub&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello_str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;rate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;talker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROSInterruptException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;scripts/listener.py&lt;/p&gt;
+
+    &lt;div class=&quot;language-py highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rospy&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;std_msgs.msg&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loginfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_caller_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;python listener: I heard &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'python_listener'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;anonymous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;topic_chatter-py&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x scripts/talker.py scripts/listener.py
+
+&lt;span class=&quot;c&quot;&gt;# build&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws
+catkin_make
+
+&lt;span class=&quot;c&quot;&gt;# start talker &amp;amp; listener via rosrun.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Should be started in different consoles.&lt;/span&gt;
+rosrun rosrun beginner_tutorials talker
+rosrun rosrun beginner_tutorials listener
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;213-examining-the-simple-publisher-and-subscriber&quot;&gt;2.13. Examining the Simple Publisher and Subscriber&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/ExaminingPublisherSubscriber&quot;&gt;http://wiki.ros.org/ROS/Tutorials/ExaminingPublisherSubscriber&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;214-writing-a-simple-service-and-client-c&quot;&gt;2.14. Writing a Simple Service and Client (C++)&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28c%2B%2B%29&quot;&gt;http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28c%2B%2B%29&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; src
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;src/add_two_ints_server.cpp&lt;/p&gt;
+
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;ros/ros.h&quot;
+#include &quot;beginner_tutorials/AddTwoInts.h&quot;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beginner_tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddTwoInts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;beginner_tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddTwoInts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ROS_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;request: x=%ld, y=%ld&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ROS_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sending back response: [%ld]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;add_two_ints_server&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NodeHandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceServer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advertiseService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;add_two_ints&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ROS_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Ready to add two ints.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;src/add_two_ints_client.cpp&lt;/p&gt;
+
+    &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;ros/ros.h&quot;
+#include &quot;beginner_tutorials/AddTwoInts.h&quot;
+#include &amp;lt;cstdlib&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;add_two_ints_client&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ROS_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;usage: add_two_ints_client X Y&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NodeHandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceClient&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serviceClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beginner_tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddTwoInts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;add_two_ints&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;beginner_tutorials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddTwoInts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;srv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;srv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;srv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atoll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ROS_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Sum: %ld&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ROS_ERROR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Failed to call service add_two_ints&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CMakeLists.txt&lt;/p&gt;
+
+    &lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#......
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;add_executable(add_two_ints_server&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;src/add_two_ints_server.cpp)&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;target_link_libraries(add_two_ints_server&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;${catkin_LIBRARIES})&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;add_dependencies(add_two_ints_server&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;beginner_tutorials_gencpp)&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;add_executable(add_two_ints_client&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;src/add_two_ints_client.cpp)&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;target_link_libraries(add_two_ints_client&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;${catkin_LIBRARIES})&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;add_dependencies(add_two_ints_client&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;beginner_tutorials_gencpp)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#......
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws
+catkin_make
+
+roscore
+
+rosrun beginner_tutorials add_two_ints_server
+
+rosrun beginner_tutorials add_two_ints_client 1 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;215-writing-a-simple-service-and-client-python&quot;&gt;2.15. Writing a Simple Service and Client (Python)&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;asdf&quot;&gt;asdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; scripts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;scripts/add_two_ints_server.py&lt;/p&gt;
+
+    &lt;div class=&quot;language-py highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python
+&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;beginner_tutorials.srv&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rospy&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handle_add_two_ints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Returning [&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s + &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s = &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s]&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AddTwoIntsResponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_two_ints_server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'add_two_ints_server'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Service&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'add_two_ints'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AddTwoInts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handle_add_two_ints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Ready to add two ints.&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;add_two_ints_server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;scripts/add_two_ints_client.py&lt;/p&gt;
+
+    &lt;div class=&quot;language-py highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python
+&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;rospy&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;beginner_tutorials.srv&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_two_ints_client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wait_for_service&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'add_two_ints'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;add_two_ints&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceProxy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'add_two_ints'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AddTwoInts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;resp1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add_two_ints&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resp1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rospy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Service call failed: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;usage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s [x y]&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;usage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Requesting &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s+&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s + &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s = &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add_two_ints_client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;roscd beginner_tutorials
+&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x scripts/add_two_ints_server.py scripts/add_two_ints_client.py
+
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/catkin_ws
+catkin_make
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;216-examining-the-simple-service-and-client&quot;&gt;2.16. Examining the Simple Service and Client&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/ExaminingServiceClient&quot;&gt;http://wiki.ros.org/ROS/Tutorials/ExaminingServiceClient&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;c++:&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# start service&lt;/span&gt;
+rosrun beginner_tutorials add_two_ints_server
+
+&lt;span class=&quot;c&quot;&gt;# start client&lt;/span&gt;
+rosrun beginner_tutorials add_two_ints_client 1 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;python:&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# start service&lt;/span&gt;
+rosrun beginner_tutorials add_two_ints_server.py
+
+&lt;span class=&quot;c&quot;&gt;# start client&lt;/span&gt;
+rosrun beginner_tutorials add_two_ints_client.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;217-recording-and-playing-back-data&quot;&gt;2.17. Recording and playing back data&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/Recording%20and%20playing%20back%20data&quot;&gt;http://wiki.ros.org/ROS/Tutorials/Recording%20and%20playing%20back%20data&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;start siulator in seperate terminals:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# terminal 1&lt;/span&gt;
+roscore
+
+&lt;span class=&quot;c&quot;&gt;# terminal 2&lt;/span&gt;
+rosrun turtlesim turtlesim_node
+
+&lt;span class=&quot;c&quot;&gt;# terminal 3&lt;/span&gt;
+rosrun turtlesim turtle_teleop_key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;recording&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/bagfiles
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/bagfiles
+rosbag record &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;playback&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rosbag info &amp;lt;your bagfile&amp;gt;
+
+rosbag play &amp;lt;your bagfile&amp;gt;
+rosbag play &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; 2 &amp;lt;your bagfile&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rosbag record &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; subset /turtle1/cmd_vel /turtle1/pose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The -O argument tells rosbag record to log to a file named subset.bag, and the topic arguments cause rosbag record to only subscribe to these two topics.&lt;/p&gt;
+
+&lt;h3 id=&quot;218-getting-started-with-roswtf&quot;&gt;2.18. Getting started with roswtf&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/Getting%20started%20with%20roswtf&quot;&gt;http://wiki.ros.org/ROS/Tutorials/Getting%20started%20with%20roswtf&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;219-navigating-the-ros-wiki&quot;&gt;2.19. Navigating the ROS wiki&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/NavigatingTheWiki&quot;&gt;http://wiki.ros.org/ROS/Tutorials/NavigatingTheWiki&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">ROS</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/07/08/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-07-08T17:09:16+08:00</published><updated>2019-07-08T17:09:16+08:00</updated><id>http://localhost:4000/jekyll/update/2019/07/08/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/07/08/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-al&lt;/span&gt; /
+find /etc &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello world.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;test:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.test.com&quot;&gt;test url&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;test url&quot;&gt;test url&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.test.com&quot;&gt;test&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>

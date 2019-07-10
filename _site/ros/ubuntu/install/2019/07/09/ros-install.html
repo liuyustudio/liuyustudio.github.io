@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Ubuntu 16.04 ROS Install | 博客空间</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Ubuntu 16.04 ROS Install" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ROS" />
+<meta property="og:description" content="ROS" />
+<link rel="canonical" href="http://localhost:4000/ros/ubuntu/install/2019/07/09/ros-install.html" />
+<meta property="og:url" content="http://localhost:4000/ros/ubuntu/install/2019/07/09/ros-install.html" />
+<meta property="og:site_name" content="博客空间" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-09T11:51:16+08:00" />
+<script type="application/ld+json">
+{"headline":"Ubuntu 16.04 ROS Install","dateModified":"2019-07-09T11:51:16+08:00","datePublished":"2019-07-09T11:51:16+08:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ros/ubuntu/install/2019/07/09/ros-install.html"},"url":"http://localhost:4000/ros/ubuntu/install/2019/07/09/ros-install.html","description":"ROS","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="博客空间" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">博客空间</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Ubuntu 16.04 ROS Install</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-07-09T11:51:16+08:00" itemprop="datePublished">Jul 9, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="ros">ROS</h1>
+
+<p>Robot Operating System Web Site: <a href="http://www.ros.org">http://www.ros.org</a></p>
+
+<!-- TOC -->
+
+<ul>
+  <li><a href="#1-environment">1. environment</a>
+    <ul>
+      <li><a href="#11-install">1.1. install</a>
+        <ul>
+          <li><a href="#111-操作系统网络代理安装配置">1.1.1. 操作系统、网络、代理安装、配置</a></li>
+          <li><a href="#112-ros-安装">1.1.2. ROS 安装</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#2-tutorials">2. Tutorials</a>
+    <ul>
+      <li><a href="#21-installing-and-configuring-ros-environment">2.1. Installing and Configuring ROS Environment</a></li>
+      <li><a href="#22-navigating-the-ros-filesystem">2.2. Navigating the ROS Filesystem</a></li>
+      <li><a href="#23-creating-a-ros-package">2.3. Creating a ROS Package</a></li>
+      <li><a href="#24-building-a-ros-package">2.4. Building a ROS Package</a></li>
+      <li><a href="#25-understanding-ros-nodes">2.5. Understanding ROS Nodes</a></li>
+      <li><a href="#26-understanding-ros-topics">2.6. Understanding ROS Topics</a></li>
+      <li><a href="#27-understanding-ros-services-and-parameters">2.7. Understanding ROS Services and Parameters</a></li>
+      <li><a href="#28-using-rqt_console-and-roslaunch">2.8. Using rqt_console and roslaunch</a></li>
+      <li><a href="#29-using-rosed-to-edit-files-in-ros">2.9. Using rosed to edit files in ROS</a></li>
+      <li><a href="#210-creating-a-ros-msg-a">2.10. Creating a ROS msg a</a></li>
+      <li><a href="#211-writing-a-simple-publisher-and-subscriber-c">2.11. Writing a Simple Publisher and Subscriber (C++)</a></li>
+      <li><a href="#212-writing-a-simple-publisher-and-subscriber-python">2.12. Writing a Simple Publisher and Subscriber (Python)</a></li>
+      <li><a href="#213-examining-the-simple-publisher-and-subscriber">2.13. Examining the Simple Publisher and Subscriber</a></li>
+      <li><a href="#214-writing-a-simple-service-and-client-c">2.14. Writing a Simple Service and Client (C++)</a></li>
+      <li><a href="#215-writing-a-simple-service-and-client-python">2.15. Writing a Simple Service and Client (Python)</a></li>
+      <li><a href="#216-examining-the-simple-service-and-client">2.16. Examining the Simple Service and Client</a></li>
+      <li><a href="#217-recording-and-playing-back-data">2.17. Recording and playing back data</a></li>
+      <li><a href="#218-getting-started-with-roswtf">2.18. Getting started with roswtf</a></li>
+      <li><a href="#219-navigating-the-ros-wiki">2.19. Navigating the ROS wiki</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- /TOC -->
+
+<h2 id="1-environment">1. environment</h2>
+
+<h3 id="11-install">1.1. install</h3>
+
+<p>仅以 Ubuntu 为底层操作系统。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ROS 版本</th>
+      <th>官方支持 Ubuntu 版本</th>
+      <th>Installation Guide</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ROS Kinetic Kame</td>
+      <td>Ubuntu Wily (15.10) and Ubuntu Xenial (16.04 LTS)</td>
+      <td><a href="http://wiki.ros.org/kinetic/Installation/Ubuntu">http://wiki.ros.org/kinetic/Installation/Ubuntu</a></td>
+    </tr>
+    <tr>
+      <td>ROS Melodic Morenia</td>
+      <td>Ubuntu Artful (17.10), Bionic (18.04 LTS) and Debian Stretch</td>
+      <td><a href="http://wiki.ros.org/melodic/Installation/Ubuntu">http://wiki.ros.org/melodic/Installation/Ubuntu</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="111-操作系统网络代理安装配置">1.1.1. 操作系统、网络、代理安装、配置</h4>
+
+<p>略</p>
+
+<h4 id="112-ros-安装">1.1.2. ROS 安装</h4>
+
+<p>以 Kenetic 版本为例</p>
+
+<ul>
+  <li>
+    <p>install ROS platform</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># setup sources list</span>
+<span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" &gt; /etc/apt/sources.list.d/ros-latest.list'</span>
+
+<span class="c"># setup apt keys</span>
+<span class="c"># available server:</span>
+<span class="c">#   - hkp://keyserver.ubuntu.com:80</span>
+<span class="c">#   - hkp://pgp.mit.edu:80</span>
+<span class="nb">sudo </span>apt-key adv <span class="nt">--keyserver</span> <span class="s1">'hkp://keyserver.ubuntu.com:80'</span> <span class="nt">--recv-key</span> C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+<span class="c"># install</span>
+<span class="c">#---------------------------------------------------------</span>
+<span class="c"># Desktop-Full Install: (Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators and 2D/3D perception</span>
+<span class="c">#</span>
+<span class="c">#   sudo apt install ros-melodic-desktop-full</span>
+<span class="c">#</span>
+<span class="c">#---------------------------------------------------------</span>
+<span class="c"># Desktop Install: ROS, rqt, rviz, and robot-generic libraries</span>
+<span class="c">#</span>
+<span class="c">#   sudo apt install ros-melodic-desktop</span>
+<span class="c">#</span>
+<span class="c">#---------------------------------------------------------</span>
+<span class="c"># ROS-Base: (Bare Bones) ROS package, build, and communication libraries. No GUI tools.</span>
+<span class="c">#</span>
+<span class="c">#   sudo apt install ros-melodic-ros-base</span>
+<span class="c">#</span>
+<span class="c">#---------------------------------------------------------</span>
+<span class="c"># Individual Package</span>
+<span class="c">#</span>
+<span class="c">#   sudo apt install ros-melodic-PACKAGE</span>
+<span class="c"># e.g.</span>
+<span class="c">#   sudo apt install ros-melodic-slam-gmapping</span>
+<span class="c">#</span>
+<span class="c"># To find available packages, use:</span>
+<span class="c">#</span>
+<span class="c">#   apt search ros-melodic</span>
+<span class="c">#</span>
+
+<span class="nb">sudo </span>apt <span class="nb">install </span>ros-melodic-desktop-full
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Initialize rosdep</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>rosdep init
+rosdep update
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>ROS Environment Setup</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"source /opt/ros/kinetic/setup.bash"</span> <span class="o">&gt;&gt;</span> ~/.bashrc
+<span class="nb">source</span> ~/.bashrc
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Dependencies for building packages</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>python-rosinstall python-rosinstall-generator python-wstool build-essential
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="2-tutorials">2. Tutorials</h2>
+
+<h3 id="21-installing-and-configuring-ros-environment">2.1. Installing and Configuring ROS Environment</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment">http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment</a></p>
+
+<ul>
+  <li>Install ROS
+略</li>
+  <li>Managing Your Environment
+略</li>
+  <li>
+    <p>Create a ROS Workspace</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/catkin_ws/src
+<span class="nb">cd</span> ~/catkin_ws/
+catkin_make
+
+<span class="nb">source </span>devel/setup.bash
+
+<span class="nb">echo</span> <span class="nv">$ROS_PACKAGE_PATH</span>
+<span class="c"># /home/youruser/catkin_ws/src:/opt/ros/kinetic/share</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="22-navigating-the-ros-filesystem">2.2. Navigating the ROS Filesystem</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/NavigatingTheFilesystem">http://wiki.ros.org/ROS/Tutorials/NavigatingTheFilesystem</a></p>
+
+<ul>
+  <li>install ros-tutorials</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># sudo apt-get install ros-&lt;distro&gt;-ros-tutorials</span>
+<span class="c"># &lt;distro&gt;: indigo, kinetic, lunar, etc.</span>
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-kinetic-ros-tutorials
+</code></pre></div></div>
+
+<h3 id="23-creating-a-ros-package">2.3. Creating a ROS Package</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/CreatingPackage">http://wiki.ros.org/ROS/Tutorials/CreatingPackage</a></p>
+
+<p>use the <strong>catkin_create_pkg</strong> script to create a new package called ‘beginner_tutorials’ which depends on std_msgs, roscpp, and rospy:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/catkin_ws/src
+
+<span class="c"># catkin_create_pkg &lt;package_name&gt; [depend1] [depend2] [depend3]</span>
+catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+</code></pre></div></div>
+
+<p>Building a catkin workspace and sourcing the setup file:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/catkin_ws
+
+catkin_make
+
+<span class="c"># To add the workspace to ROS environment</span>
+<span class="nb">source</span> ~/catkin_ws/devel/setup.bash
+</code></pre></div></div>
+
+<p>Review <strong>first-order</strong> dependencies via <strong>rospack</strong>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rospack depends1 beginner_tutorials
+</code></pre></div></div>
+
+<p>list corresponding <strong>package.xml</strong>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">cat </span>package.xml
+</code></pre></div></div>
+
+<p>output:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;package</span> <span class="na">format=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+...
+  <span class="nt">&lt;buildtool_depend&gt;</span>catkin<span class="nt">&lt;/buildtool_depend&gt;</span>
+  <span class="nt">&lt;build_depend&gt;</span>roscpp<span class="nt">&lt;/build_depend&gt;</span>
+  <span class="nt">&lt;build_depend&gt;</span>rospy<span class="nt">&lt;/build_depend&gt;</span>
+  <span class="nt">&lt;build_depend&gt;</span>std_msgs<span class="nt">&lt;/build_depend&gt;</span>
+...
+<span class="nt">&lt;/package&gt;</span>
+</code></pre></div></div>
+
+<p>List indirect dependencies:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rospack depends beginner_tutorials
+</code></pre></div></div>
+
+<h3 id="24-building-a-ros-package">2.4. Building a ROS Package</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/BuildingPackages">http://wiki.ros.org/ROS/Tutorials/BuildingPackages</a></p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># import environment settings</span>
+<span class="c"># source /opt/ros/%YOUR_ROS_DISTRO%/setup.bash</span>
+<span class="c">#</span>
+<span class="c"># For Kinetic for instance</span>
+<span class="nb">source</span> /opt/ros/kinetic/setup.bash
+</code></pre></div></div>
+
+<p>Note:</p>
+
+<ul>
+  <li>
+    <p>catkin_make combines the calls to cmake and make in the standard CMake workflow:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In a CMake project</span>
+<span class="nb">mkdir </span>build
+<span class="nb">cd </span>build
+cmake ..
+make
+make <span class="nb">install</span>  <span class="c"># (optionally)</span>
+
+<span class="c">#===========================</span>
+
+<span class="c"># In a catkin workspace</span>
+catkin_make
+catkin_make <span class="nb">install</span>  <span class="c"># (optionally)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>build in a different place:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In a catkin workspace</span>
+catkin_make <span class="nt">--source</span> my_src
+catkin_make <span class="nb">install</span> <span class="nt">--source</span> my_src  <span class="c"># (optionally)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="25-understanding-ros-nodes">2.5. Understanding ROS Nodes</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes">http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes</a></p>
+
+<ul>
+  <li>roscore</li>
+  <li>rosnode
+    <ul>
+      <li>rosnode list</li>
+      <li>rosnode info /rosout</li>
+      <li>rosnode ping my_turtle</li>
+    </ul>
+  </li>
+  <li>rosrun
+    <ul>
+      <li>rosrun turtlesim turtlesim_node</li>
+      <li>rosrun turtlesim turtlesim_node __name:=my_turtle</li>
+    </ul>
+  </li>
+  <li>rosnode
+    <ul>
+      <li>rosnode cleanup</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="26-understanding-ros-topics">2.6. Understanding ROS Topics</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics">http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics</a></p>
+
+<ul>
+  <li>start roscore</li>
+  <li>turtlesim
+    <ul>
+      <li>start turtlesim
+rosrun turtlesim turtlesim_node</li>
+      <li>turtle keyboard teleoperation
+rosrun turtlesim turtle_teleop_key</li>
+    </ul>
+  </li>
+  <li>
+    <p>rostopic</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>cmd</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>rostopic bw</td>
+          <td>display bandwidth used by topic</td>
+        </tr>
+        <tr>
+          <td>rostopic echo</td>
+          <td>print messages to screen</td>
+        </tr>
+        <tr>
+          <td>rostopic hz</td>
+          <td>display publishing rate of topic</td>
+        </tr>
+        <tr>
+          <td>rostopic list</td>
+          <td>print information about active topics</td>
+        </tr>
+        <tr>
+          <td>rostopic pub</td>
+          <td>publish data to topic</td>
+        </tr>
+        <tr>
+          <td>rostopic type</td>
+          <td>print topic type</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>rostopic echo /turtle1/cmd_vel</li>
+      <li>rostopic list -v</li>
+      <li>rostopic type
+        <ul>
+          <li>rostopic type /turtle1/cmd_vel</li>
+          <li>rosmsg show geometry_msgs/Twist</li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>rostopic type /turtle1/cmd_vel</td>
+                  <td>rosmsg show</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+      <li>rostopic pub
+        <ul>
+          <li>rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist – ‘[2.0, 0.0, 0.0]’ ‘[0.0, 0.0, 1.8]’</li>
+          <li>rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 – ‘[2.0, 0.0, 0.0]’ ‘[0.0, 0.0, -1.8]’</li>
+        </ul>
+      </li>
+      <li>rostopic echo /turtle1/pose</li>
+      <li>rostopic hz
+        <ul>
+          <li>rostopic hz /turtle1/pose</li>
+        </ul>
+      </li>
+      <li>rosrun rqt_plot rqt_plot</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="27-understanding-ros-services-and-parameters">2.7. Understanding ROS Services and Parameters</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams">http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams</a></p>
+
+<ul>
+  <li>rosservice
+    <ul>
+      <li>rosservice
+cmd | desc
+—|—
+rosservice list | print information about active services
+rosservice call | call the service with the provided args
+rosservice type | print service type
+rosservice find | find services by service type
+rosservice uri  | print service ROSRPC uri</li>
+      <li>rosservice list</li>
+      <li>rosservice type [service]
+rosservice type /clear
+rosservice type /spawn | rossrv show</li>
+      <li>rosservice call [service] [args]
+rosservice call /clear
+rosservice call /spawn 2 2 0.2 “”</li>
+    </ul>
+  </li>
+  <li>rosparam
+    <ul>
+      <li>rosparam
+cmd | desc
+—|—
+rosparam set    | set parameter
+rosparam get    | get parameter
+rosparam load   | load parameters from file
+rosparam dump   | dump parameters to file
+rosparam delete | delete parameter
+rosparam list   | list parameter names</li>
+      <li>rosparam list</li>
+      <li>
+        <p>rosparam set [param_name]</p>
+
+        <pre><code class="language-cmd">rosparam set /background_r 150
+rosservice call /clear
+</code></pre>
+      </li>
+      <li>
+        <p>rosparam get [param_name]</p>
+
+        <pre><code class="language-cmd">rosparam get /background_g
+rosparam get /
+</code></pre>
+      </li>
+      <li>
+        <p>rosparam dump [file_name] [namespace]</p>
+
+        <pre><code class="language-cmd">rosparam dump params.yaml
+</code></pre>
+      </li>
+      <li>
+        <p>rosparam load [file_name] [namespace]</p>
+
+        <pre><code class="language-cmd">rosparam load params.yaml copy
+rosparam get /copy/background_b
+</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="28-using-rqt_console-and-roslaunch">2.8. Using rqt_console and roslaunch</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch">http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch</a></p>
+
+<ul>
+  <li>
+    <p>test rqt_console and ros logger system</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun rqt_console rqt_console
+rosrun rqt_logger_level rqt_logger_level
+
+rosrun turtlesim turtlesim_node
+rostopic pub /turtle1/cmd_vel geometry_msgs/Twist <span class="nt">-r</span> 1 <span class="nt">--</span> <span class="s1">'{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>using roslaunch</p>
+  </li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> ~/catkin_ws
+<span class="nb">source </span>devel/setup.bash
+roscd beginner_tutorials
+
+<span class="nb">mkdir </span>launch
+<span class="nb">cd </span>launch
+
+vi turtlemimic.launch
+</code></pre></div></div>
+
+<p>NOTE: The directory to store launch files doesn’t necessarily have to be named launch. In fact you don’t even need to store them in a directory. roslaunch command automatically looks into the passed package and detects available launch files. However, this is considered good practice.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;launch&gt;</span>
+
+  <span class="nt">&lt;group</span> <span class="na">ns=</span><span class="s">"turtlesim1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"turtlesim"</span> <span class="na">name=</span><span class="s">"sim"</span> <span class="na">type=</span><span class="s">"turtlesim_node"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/group&gt;</span>
+
+  <span class="nt">&lt;group</span> <span class="na">ns=</span><span class="s">"turtlesim2"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"turtlesim"</span> <span class="na">name=</span><span class="s">"sim"</span> <span class="na">type=</span><span class="s">"turtlesim_node"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/group&gt;</span>
+
+  <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"turtlesim"</span> <span class="na">name=</span><span class="s">"mimic"</span> <span class="na">type=</span><span class="s">"mimic"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;remap</span> <span class="na">from=</span><span class="s">"input"</span> <span class="na">to=</span><span class="s">"turtlesim1/turtle1"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;remap</span> <span class="na">from=</span><span class="s">"output"</span> <span class="na">to=</span><span class="s">"turtlesim2/turtle1"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/node&gt;</span>
+
+<span class="nt">&lt;/launch&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>test roslaunching</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roslaunch beginner_tutorials turtlemimic.launch
+
+rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist <span class="nt">-r</span> 1 <span class="nt">--</span> <span class="s1">'[2.0, 0.0, 0.0]'</span> <span class="s1">'[0.0, 0.0, -1.8]'</span>
+</code></pre></div></div>
+
+<h3 id="29-using-rosed-to-edit-files-in-ros">2.9. Using rosed to edit files in ROS</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/UsingRosEd">http://wiki.ros.org/ROS/Tutorials/UsingRosEd</a></p>
+
+<ul>
+  <li>rosed [package_name] [filename]
+    <ul>
+      <li>rosed roscpp Logger.msg</li>
+    </ul>
+  </li>
+  <li>change default editor of rosed
+    <ul>
+      <li>export EDITOR=’nano -w’</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="210-creating-a-ros-msg-a">2.10. Creating a ROS msg a</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv">http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv</a></p>
+
+<ul>
+  <li>
+    <p>Brief</p>
+
+    <p>msg files are stored in the <strong>msg</strong> directory of a package, and srv files are stored in the <strong>srv</strong> directory.</p>
+
+    <ul>
+      <li>
+        <p>msg</p>
+
+        <p>msg files are simple text files that describe the fields of a ROS message. They are used to generate source code for messages in different languages.</p>
+
+        <p>msgs are just simple text files with a field type and field name per line. field type:</p>
+
+        <ul>
+          <li>int8, int16, int32, int64 (plus uint*)</li>
+          <li>float32, float64</li>
+          <li>string</li>
+          <li>time, duration</li>
+          <li>other msg files</li>
+          <li>variable-length array[] and fixed-length array[C]</li>
+        </ul>
+
+        <p>There is also a special type in ROS: Header, the header contains a timestamp and coordinate frame information that are commonly used in ROS. You will frequently see the first line in a msg file have Header header.</p>
+
+        <p>example:</p>
+
+        <pre><code class="language-msg">Header header
+string child_frame_id
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
+</code></pre>
+      </li>
+      <li>
+        <p>srv</p>
+
+        <p>an srv file describes a service. It is composed of two parts: a request and a response.</p>
+
+        <p>srv files are just like msg files, except they contain two parts: a request and a response. The two parts are separated by a ‘—’ line. Here is an example of a srv file:</p>
+
+        <pre><code class="language-srv">int64 A
+int64 B
+---
+int64 Sum
+</code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Using msg</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">mkdir </span>msg
+<span class="nb">echo</span> <span class="s2">"int64 num"</span> <span class="o">&gt;</span> msg/Num.msg
+</code></pre></div>    </div>
+
+    <p>Note that at build time, we need “message_generation”, while at runtime, we only need “message_runtime”.</p>
+
+    <p>In package.xml:</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build_depend&gt;</span>message_generation<span class="nt">&lt;/build_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>message_runtime<span class="nt">&lt;/exec_depend&gt;</span>
+</code></pre></div>    </div>
+
+    <p>Modify <strong>CMakeLists.txt</strong>:</p>
+
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add message_generation to the list of COMPONENTS.
+</span><span class="err">find_package(catkin</span> <span class="err">REQUIRED</span> <span class="err">COMPONENTS</span>
+  <span class="err">roscpp</span>
+  <span class="err">rospy</span>
+  <span class="err">std_msgs</span>
+  <span class="err">message_generation</span>
+<span class="err">)</span>
+
+<span class="c"># Also make sure you export the message runtime dependency.
+</span><span class="err">catkin_package(</span>
+  <span class="err">...</span>
+  <span class="err">CATKIN_DEPENDS</span> <span class="err">message_runtime</span> <span class="err">...</span>
+  <span class="err">...)</span>
+
+<span class="c"># add message filter
+</span><span class="err">add_message_files(</span>
+  <span class="err">FILES</span>
+  <span class="err">Num.msg</span>
+<span class="err">)</span>
+
+<span class="c"># enable generate_message() function
+</span><span class="err">generate_messages(</span>
+  <span class="err">DEPENDENCIES</span>
+  <span class="err">std_msgs</span>
+<span class="err">)</span>
+</code></pre></div>    </div>
+
+    <p>Use <strong>rosmsg</strong> show message info:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosmsg show beginner_tutorials/Num
+<span class="c"># or</span>
+rosmsg show Num
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Using srv</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a srv</span>
+roscd beginner_tutorials
+<span class="nb">mkdir </span>srv
+
+<span class="c"># copy an existing one from another package by roscp</span>
+<span class="c"># roscp [package_name] [file_to_copy_path] [copy_path]</span>
+roscp rospy_tutorials AddTwoInts.srv srv/AddTwoInts.srv
+</code></pre></div>    </div>
+
+    <p>In <strong>package.xml</strong>:</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build_depend&gt;</span>message_generation<span class="nt">&lt;/build_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>message_runtime<span class="nt">&lt;/exec_depend&gt;</span>
+</code></pre></div>    </div>
+
+    <p>In <strong>CMakeLists.txt</strong>:</p>
+
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Add message_generation to the list of COMPONENTS.
+</span><span class="err">find_package(catkin</span> <span class="err">REQUIRED</span> <span class="err">COMPONENTS</span>
+  <span class="err">roscpp</span>
+  <span class="err">rospy</span>
+  <span class="err">std_msgs</span>
+  <span class="err">message_generation</span>
+<span class="err">)</span>
+
+<span class="c"># Import service file - AddTwoInts.srv
+</span><span class="err">add_service_files(</span>
+  <span class="err">FILES</span>
+  <span class="err">AddTwoInts.srv</span>
+<span class="err">)</span>
+</code></pre></div>    </div>
+
+    <p>Use <strong>rossrv</strong> show message info:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rossrv show beginner_tutorials/AddTwoInts
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Common step for msg and srv</p>
+
+    <p>Changes in CMakeLists.txt:</p>
+
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add any packages you depend on which contain .msg files that your messages use like this:
+</span><span class="err">generate_messages(</span>
+  <span class="err">DEPENDENCIES</span>
+  <span class="err">std_msgs</span>
+<span class="err">)</span>
+</code></pre></div>    </div>
+
+    <p>make our package again:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">cd</span> ../..
+catkin_make <span class="nb">install
+cd</span> -
+</code></pre></div>    </div>
+
+    <p>Any .msg file in the msg directory will generate code for use in all supported languages:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>language</th>
+          <th>path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>C++</td>
+          <td>~/catkin_ws/devel/include/beginner_tutorials</td>
+        </tr>
+        <tr>
+          <td>Python2</td>
+          <td>~/catkin_ws/devel/lib/python2.7/dist-packages/beginner_tutorials/msg</td>
+        </tr>
+        <tr>
+          <td>Lisp</td>
+          <td>~/catkin_ws/devel/share/common-lisp/ros/beginner_tutorials/msg</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Similarly, any .srv files in the srv directory will have generated code in supported languages.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>language</th>
+          <th>path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>C++</td>
+          <td>~/catkin_ws/devel/include/beginner_tutorials</td>
+        </tr>
+        <tr>
+          <td>Python2</td>
+          <td>~/catkin_ws/devel/lib/python2.7/dist-packages/beginner_tutorials/srv</td>
+        </tr>
+        <tr>
+          <td>Lisp</td>
+          <td>~/catkin_ws/devel/share/common-lisp/ros/beginner_tutorials/srv</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="211-writing-a-simple-publisher-and-subscriber-c">2.11. Writing a Simple Publisher and Subscriber (C++)</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29">http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29</a></p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">mkdir</span> <span class="nt">-p</span> src
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>src/talker.cpp</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "ros/ros.h"
+#include "std_msgs/String.h"
+</span>
+<span class="cp">#include &lt;sstream&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"cpp_talker"</span><span class="p">);</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">Publisher</span> <span class="n">chatter_pub</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">advertise</span><span class="o">&lt;</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"topic_chatter"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">Rate</span> <span class="n">loop_rate</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+  <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">ros</span><span class="o">::</span><span class="n">ok</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span> <span class="n">msg</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">"cpp-talker: hello world "</span> <span class="o">&lt;&lt;</span> <span class="n">count</span><span class="p">;</span>
+    <span class="n">msg</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+
+    <span class="n">chatter_pub</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">spinOnce</span><span class="p">();</span>
+
+    <span class="n">loop_rate</span><span class="p">.</span><span class="n">sleep</span><span class="p">();</span>
+    <span class="o">++</span><span class="n">count</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>src/listener.cpp</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "ros/ros.h"
+#include "std_msgs/String.h"
+</span>
+<span class="kt">void</span> <span class="nf">chatterCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span><span class="o">::</span><span class="n">ConstPtr</span><span class="o">&amp;</span> <span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"cpp-listener: I heard: [%s]"</span><span class="p">,</span> <span class="n">msg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"cpp_listener"</span><span class="p">);</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"topic_chatter"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">chatterCallback</span><span class="p">);</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>CMakeLists.txt</p>
+
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">cmake_minimum_required(VERSION</span> <span class="err">2.8.3)</span>
+<span class="err">project(beginner_tutorials)</span>
+
+<span class="c">## Find catkin and any catkin packages
+</span><span class="err">find_package(catkin</span> <span class="err">REQUIRED</span> <span class="err">COMPONENTS</span> <span class="err">roscpp</span> <span class="err">rospy</span> <span class="err">std_msgs</span> <span class="err">genmsg)</span>
+
+<span class="c">## Declare ROS messages and services
+</span><span class="err">add_message_files(DIRECTORY</span> <span class="err">msg</span> <span class="err">FILES</span> <span class="err">Num.msg)</span>
+<span class="err">add_service_files(DIRECTORY</span> <span class="err">srv</span> <span class="err">FILES</span> <span class="err">AddTwoInts.srv)</span>
+
+<span class="c">## Generate added messages and services
+</span><span class="err">generate_messages(DEPENDENCIES</span> <span class="err">std_msgs)</span>
+
+<span class="c">## Declare a catkin package
+</span><span class="err">catkin_package()</span>
+
+<span class="err">add_executable(talker</span> <span class="err">src/talker.cpp)</span>
+<span class="err">target_link_libraries(talker</span> <span class="err">${catkin_LIBRARIES})</span>
+<span class="err">add_dependencies(talker</span> <span class="err">beginner_tutorials_generate_messages_cpp)</span>
+
+<span class="err">add_executable(listener</span> <span class="err">src/listener.cpp)</span>
+<span class="err">target_link_libraries(listener</span> <span class="err">${catkin_LIBRARIES})</span>
+<span class="err">add_dependencies(listener</span> <span class="err">beginner_tutorials_generate_messages_cpp)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># build</span>
+<span class="nb">cd</span> ~/catkin_ws
+catkin_make
+
+<span class="c"># start talker &amp; listener via rosrun.</span>
+<span class="c"># Should be started in different consoles.</span>
+rosrun rosrun beginner_tutorials talker
+rosrun rosrun beginner_tutorials listener
+</code></pre></div></div>
+
+<h3 id="212-writing-a-simple-publisher-and-subscriber-python">2.12. Writing a Simple Publisher and Subscriber (Python)</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29">http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29</a></p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">mkdir</span> <span class="nt">-p</span> scripts
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>scripts/talker.py</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span><span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+
+<span class="k">def</span> <span class="nf">talker</span><span class="p">():</span>
+    <span class="n">pub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s">'topic_chatter-py'</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s">'python_talker'</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># 10hz
+</span>    <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
+        <span class="n">hello_str</span> <span class="o">=</span> <span class="s">"python talker: hello world </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
+        <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
+        <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">talker</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInterruptException</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>scripts/listener.py</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span><span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+
+<span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_caller_id</span><span class="p">()</span> <span class="o">+</span> <span class="s">"python listener: I heard </span><span class="si">%</span><span class="s">s"</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">listener</span><span class="p">():</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s">'python_listener'</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s">"topic_chatter-py"</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">listener</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x scripts/talker.py scripts/listener.py
+
+<span class="c"># build</span>
+<span class="nb">cd</span> ~/catkin_ws
+catkin_make
+
+<span class="c"># start talker &amp; listener via rosrun.</span>
+<span class="c"># Should be started in different consoles.</span>
+rosrun rosrun beginner_tutorials talker
+rosrun rosrun beginner_tutorials listener
+</code></pre></div></div>
+
+<h3 id="213-examining-the-simple-publisher-and-subscriber">2.13. Examining the Simple Publisher and Subscriber</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/ExaminingPublisherSubscriber">http://wiki.ros.org/ROS/Tutorials/ExaminingPublisherSubscriber</a></p>
+
+<h3 id="214-writing-a-simple-service-and-client-c">2.14. Writing a Simple Service and Client (C++)</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28c%2B%2B%29">http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28c%2B%2B%29</a></p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">mkdir</span> <span class="nt">-p</span> src
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>src/add_two_ints_server.cpp</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "ros/ros.h"
+#include "beginner_tutorials/AddTwoInts.h"
+</span>
+<span class="kt">bool</span> <span class="nf">add</span><span class="p">(</span><span class="n">beginner_tutorials</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">::</span><span class="n">Request</span>  <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+        <span class="n">beginner_tutorials</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">::</span><span class="n">Response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">res</span><span class="p">.</span><span class="n">sum</span> <span class="o">=</span> <span class="n">req</span><span class="p">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">req</span><span class="p">.</span><span class="n">b</span><span class="p">;</span>
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"request: x=%ld, y=%ld"</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">req</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">req</span><span class="p">.</span><span class="n">b</span><span class="p">);</span>
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"sending back response: [%ld]"</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">res</span><span class="p">.</span><span class="n">sum</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"add_two_ints_server"</span><span class="p">);</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">ServiceServer</span> <span class="n">service</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">advertiseService</span><span class="p">(</span><span class="s">"add_two_ints"</span><span class="p">,</span> <span class="n">add</span><span class="p">);</span>
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Ready to add two ints."</span><span class="p">);</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>src/add_two_ints_client.cpp</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "ros/ros.h"
+#include "beginner_tutorials/AddTwoInts.h"
+#include &lt;cstdlib&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"add_two_ints_client"</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"usage: add_two_ints_client X Y"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">beginner_tutorials</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"add_two_ints"</span><span class="p">);</span>
+  <span class="n">beginner_tutorials</span><span class="o">::</span><span class="n">AddTwoInts</span> <span class="n">srv</span><span class="p">;</span>
+  <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">atoll</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">atoll</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Sum: %ld"</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">sum</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="n">ROS_ERROR</span><span class="p">(</span><span class="s">"Failed to call service add_two_ints"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>CMakeLists.txt</p>
+
+    <div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#......
+</span><span class="err">add_executable(add_two_ints_server</span> <span class="err">src/add_two_ints_server.cpp)</span>
+<span class="err">target_link_libraries(add_two_ints_server</span> <span class="err">${catkin_LIBRARIES})</span>
+<span class="err">add_dependencies(add_two_ints_server</span> <span class="err">beginner_tutorials_gencpp)</span>
+
+<span class="err">add_executable(add_two_ints_client</span> <span class="err">src/add_two_ints_client.cpp)</span>
+<span class="err">target_link_libraries(add_two_ints_client</span> <span class="err">${catkin_LIBRARIES})</span>
+<span class="err">add_dependencies(add_two_ints_client</span> <span class="err">beginner_tutorials_gencpp)</span>
+<span class="c">#......
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/catkin_ws
+catkin_make
+
+roscore
+
+rosrun beginner_tutorials add_two_ints_server
+
+rosrun beginner_tutorials add_two_ints_client 1 2
+</code></pre></div></div>
+
+<h3 id="215-writing-a-simple-service-and-client-python">2.15. Writing a Simple Service and Client (Python)</h3>
+
+<p><a href="asdf">asdf</a></p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">mkdir</span> <span class="nt">-p</span> scripts
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>scripts/add_two_ints_server.py</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span>
+<span class="kn">from</span> <span class="nn">beginner_tutorials.srv</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">rospy</span>
+
+<span class="k">def</span> <span class="nf">handle_add_two_ints</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">"Returning [</span><span class="si">%</span><span class="s">s + </span><span class="si">%</span><span class="s">s = </span><span class="si">%</span><span class="s">s]"</span><span class="o">%</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">req</span><span class="o">.</span><span class="n">b</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">AddTwoIntsResponse</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">req</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_two_ints_server</span><span class="p">():</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s">'add_two_ints_server'</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span><span class="s">'add_two_ints'</span><span class="p">,</span> <span class="n">AddTwoInts</span><span class="p">,</span> <span class="n">handle_add_two_ints</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"Ready to add two ints."</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">add_two_ints_server</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>scripts/add_two_ints_client.py</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">beginner_tutorials.srv</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">add_two_ints_client</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s">'add_two_ints'</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">add_two_ints</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="s">'add_two_ints'</span><span class="p">,</span> <span class="n">AddTwoInts</span><span class="p">)</span>
+        <span class="n">resp1</span> <span class="o">=</span> <span class="n">add_two_ints</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resp1</span><span class="o">.</span><span class="nb">sum</span>
+    <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceException</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"Service call failed: </span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="n">e</span>
+
+<span class="k">def</span> <span class="nf">usage</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">"</span><span class="si">%</span><span class="s">s [x y]"</span><span class="o">%</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">usage</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"Requesting </span><span class="si">%</span><span class="s">s+</span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"</span><span class="si">%</span><span class="s">s + </span><span class="si">%</span><span class="s">s = </span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">add_two_ints_client</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscd beginner_tutorials
+<span class="nb">chmod</span> +x scripts/add_two_ints_server.py scripts/add_two_ints_client.py
+
+<span class="nb">cd</span> ~/catkin_ws
+catkin_make
+</code></pre></div></div>
+
+<h3 id="216-examining-the-simple-service-and-client">2.16. Examining the Simple Service and Client</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/ExaminingServiceClient">http://wiki.ros.org/ROS/Tutorials/ExaminingServiceClient</a></p>
+
+<ul>
+  <li>
+    <p>c++:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># start service</span>
+rosrun beginner_tutorials add_two_ints_server
+
+<span class="c"># start client</span>
+rosrun beginner_tutorials add_two_ints_client 1 3
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>python:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># start service</span>
+rosrun beginner_tutorials add_two_ints_server.py
+
+<span class="c"># start client</span>
+rosrun beginner_tutorials add_two_ints_client.py
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="217-recording-and-playing-back-data">2.17. Recording and playing back data</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/Recording%20and%20playing%20back%20data">http://wiki.ros.org/ROS/Tutorials/Recording%20and%20playing%20back%20data</a></p>
+
+<p>start siulator in seperate terminals:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># terminal 1</span>
+roscore
+
+<span class="c"># terminal 2</span>
+rosrun turtlesim turtlesim_node
+
+<span class="c"># terminal 3</span>
+rosrun turtlesim turtle_teleop_key
+</code></pre></div></div>
+
+<p>recording</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/bagfiles
+<span class="nb">cd</span> ~/bagfiles
+rosbag record <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>playback</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosbag info &lt;your bagfile&gt;
+
+rosbag play &lt;your bagfile&gt;
+rosbag play <span class="nt">-r</span> 2 &lt;your bagfile&gt;
+</code></pre></div></div>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosbag record <span class="nt">-O</span> subset /turtle1/cmd_vel /turtle1/pose
+</code></pre></div></div>
+
+<p>The -O argument tells rosbag record to log to a file named subset.bag, and the topic arguments cause rosbag record to only subscribe to these two topics.</p>
+
+<h3 id="218-getting-started-with-roswtf">2.18. Getting started with roswtf</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/Getting%20started%20with%20roswtf">http://wiki.ros.org/ROS/Tutorials/Getting%20started%20with%20roswtf</a></p>
+
+<h3 id="219-navigating-the-ros-wiki">2.19. Navigating the ROS wiki</h3>
+
+<p><a href="http://wiki.ros.org/ROS/Tutorials/NavigatingTheWiki">http://wiki.ros.org/ROS/Tutorials/NavigatingTheWiki</a></p>
+
+
+  </div><a class="u-url" href="/ros/ubuntu/install/2019/07/09/ros-install.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">博客空间</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">博客空间</li><li><a class="u-email" href="mailto:blog@liuyu.com">blog@liuyu.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/lueyescargot"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">lueyescargot</span></a></li><li><a href="https://www.twitter.com/lueyescargot"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">lueyescargot</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>技术为主的博客空间</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
