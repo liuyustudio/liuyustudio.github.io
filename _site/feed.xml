@@ -1,4 +1,137 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-07-10T19:14:33+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">博客空间</title><subtitle>技术为主的博客空间</subtitle><entry><title type="html">High HDI Support for UI</title><link href="http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui.html" rel="alternate" type="text/html" title="High HDI Support for UI" /><published>2019-07-10T10:24:00+08:00</published><updated>2019-07-10T10:24:00+08:00</updated><id>http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui</id><content type="html" xml:base="http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui.html">&lt;p&gt;Linux 环境中（以 Ubuntu 为例）许多应用程序似乎还没准备好迎接 4k 或以上分辨率显示设备。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-07-12T13:47:24+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">博客空间</title><subtitle>技术为主的博客空间</subtitle><entry><title type="html">Install ROS on Ubuntu</title><link href="http://localhost:4000/linux/ubuntu/ros/2019/07/12/install-ros-on-ubuntu.html" rel="alternate" type="text/html" title="Install ROS on Ubuntu" /><published>2019-07-12T11:06:00+08:00</published><updated>2019-07-12T11:06:00+08:00</updated><id>http://localhost:4000/linux/ubuntu/ros/2019/07/12/install-ros-on-ubuntu</id><content type="html" xml:base="http://localhost:4000/linux/ubuntu/ros/2019/07/12/install-ros-on-ubuntu.html">&lt;h2 id=&quot;1-前言&quot;&gt;1. 前言&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-安装说明&quot;&gt;1.1. 安装说明&lt;/h3&gt;
+
+&lt;p&gt;以下的安装步骤均参考自 ROS 官网: &lt;a href=&quot;https://www.ros.org&quot;&gt;https://www.ros.org&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;12-关于版本&quot;&gt;1.2. 关于版本&lt;/h3&gt;
+
+&lt;p&gt;日前正与曾使用 ROS 系统的朋友聊这个系统，
+为方便朋友无缝使用此环境，所以决定：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;以 Ubuntu 16.04 LTS 为底层操作系统。&lt;/li&gt;
+  &lt;li&gt;ROS 使用 Kinetic Kame 版本。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在其它操作系统上安装不同版本的 ROS 的说明在 &lt;a href=&quot;https://www.ros.org&quot;&gt;ROS 官网&lt;/a&gt; 上有详尽说明，在此不再复述。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-安装步骤&quot;&gt;2. 安装步骤&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-os-安装与配置&quot;&gt;2.1. OS 安装与配置&lt;/h3&gt;
+
+&lt;p&gt;略&lt;/p&gt;
+
+&lt;h3 id=&quot;22-ide-选择安装与配置&quot;&gt;2.2. IDE 选择、安装与配置&lt;/h3&gt;
+
+&lt;p&gt;略&lt;/p&gt;
+
+&lt;h3 id=&quot;23-ros-安装&quot;&gt;2.3. ROS 安装&lt;/h3&gt;
+
+&lt;h4 id=&quot;231-install-ros-platform&quot;&gt;2.3.1. install ROS platform&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;setup sources list&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &amp;gt; /etc/apt/sources.list.d/ros-latest.list'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;setup apt keys&lt;/p&gt;
+
+    &lt;p&gt;available key server:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;hkp://keyserver.ubuntu.com:80&lt;/li&gt;
+      &lt;li&gt;hkp://pgp.mit.edu:80&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key adv &lt;span class=&quot;nt&quot;&gt;--keyserver&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hkp://keyserver.ubuntu.com:80'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--recv-key&lt;/span&gt;   C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;install ROS&lt;/p&gt;
+
+    &lt;p&gt;安装 ROS 有三种选择：&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;安装模式&lt;/th&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Desktop-Full Install&lt;/td&gt;
+          &lt;td&gt;sudo apt install ros-kinetic-desktop-full&lt;/td&gt;
+          &lt;td&gt;ROS, rqt, rviz, robot-generic libraries, 2D/3D   imulators and 2D/3D perception&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Desktop Install&lt;/td&gt;
+          &lt;td&gt;sudo apt install ros-kinetic-desktop&lt;/td&gt;
+          &lt;td&gt;ROS, rqt, rviz, and robot-generic libraries&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;ROS-Base&lt;/td&gt;
+          &lt;td&gt;sudo apt install ros-kinetic-ros-base&lt;/td&gt;
+          &lt;td&gt;ROS package, build, and communication libraries. No GUI tools.&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;模式一为官方推荐模式，如安装 PC 端 ROS 开发环境，建议用此模式。&lt;/li&gt;
+      &lt;li&gt;模式二是模式一的减版，为熟悉 ROS 开发，且知道自己项目需要什么模块的开发人员使用。&lt;/li&gt;
+      &lt;li&gt;模式三是安装 ROS 的基础框架，一般安装在 ROS 终端运行设备上。&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;为方便，此项目的 PC 端开发、测试环境选择第一种安装模式：&lt;/p&gt;
+
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ros-kinetic-desktop-full
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;232-initialize-rosdep&quot;&gt;2.3.2. Initialize rosdep&lt;/h4&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rosdep init
+rosdep update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;233-ros-environment-setup&quot;&gt;2.3.3. ROS Environment Setup&lt;/h4&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;source /opt/ros/kinetic/setup.bash&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; ~/.bashrc
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;234-install-dependencies-for-building-packages&quot;&gt;2.3.4. Install Dependencies for building packages&lt;/h4&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python-rosinstall python-rosinstall-generator python-wstool build-essential
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">1. 前言</summary></entry><entry><title type="html">Special Shell Variables</title><link href="http://localhost:4000/linux/shell/script/2019/07/11/special-shell-variables.html" rel="alternate" type="text/html" title="Special Shell Variables" /><published>2019-07-11T14:30:00+08:00</published><updated>2019-07-11T14:30:00+08:00</updated><id>http://localhost:4000/linux/shell/script/2019/07/11/special-shell-variables</id><content type="html" xml:base="http://localhost:4000/linux/shell/script/2019/07/11/special-shell-variables.html">&lt;ul&gt;
+  &lt;li&gt;参数
+    &lt;ul&gt;
+      &lt;li&gt;参数 $0 代表函数自身的名字。&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;$1&lt;/strong&gt;～&lt;strong&gt;$9&lt;/strong&gt;代表函数前九个参数。&lt;/li&gt;
+      &lt;li&gt;第十个及以后的参数 n (n &amp;gt;= 10)不能用 $n  这种形式获取，而需要用 ${n} 这种方式。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;特殊变量
+    &lt;ul&gt;
+      &lt;li&gt;$#: 传递给函数的参数个数。&lt;/li&gt;
+      &lt;li&gt;$*: 显示所有传递给函数的参数。&lt;/li&gt;
+      &lt;li&gt;$@: 与 $* 功能类似，区别在于：
+        &lt;ul&gt;
+          &lt;li&gt;如果在参数中含有特殊变量名，如：$@ 等，Shell 在展开 $@ 时将不进行转义。需注意：特殊变量名需用双引号括起来。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;$?: 函数的返回值。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">参数 参数 $0 代表函数自身的名字。 $1～$9代表函数前九个参数。 第十个及以后的参数 n (n &amp;gt;= 10)不能用 $n 这种形式获取，而需要用 ${n} 这种方式。 特殊变量 $#: 传递给函数的参数个数。 $*: 显示所有传递给函数的参数。 $@: 与 $* 功能类似，区别在于： 如果在参数中含有特殊变量名，如：$@ 等，Shell 在展开 $@ 时将不进行转义。需注意：特殊变量名需用双引号括起来。 $?: 函数的返回值。</summary></entry><entry><title type="html">High HDI Support for UI</title><link href="http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui.html" rel="alternate" type="text/html" title="High HDI Support for UI" /><published>2019-07-10T10:24:00+08:00</published><updated>2019-07-10T10:24:00+08:00</updated><id>http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui</id><content type="html" xml:base="http://localhost:4000/linux/ui/hdi/2019/07/10/high-dpi-support-for-ui.html">&lt;p&gt;Linux 环境中（以 Ubuntu 为例）许多应用程序似乎还没准备好迎接 4k 或以上分辨率显示设备。
 当程序运行时，HDI 里应用程序用户界面中的字会变得其小无比。&lt;/p&gt;
 
 &lt;p&gt;针对这种现象，解决方案有两个：&lt;/p&gt;
