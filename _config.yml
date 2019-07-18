@@ -14,15 +14,13 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: 博客空间
-email: liuyu@liuyu.com
+email: source@liuyu.com
 description: >- # this means to ignore newlines until "baseurl:"
   技术为主的博客空间
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://blog.liuyu.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: lueyescargot
 github_username:  lueyescargot
-qq: 11222266
-wechat: 11222266
 
 # Build settings
 markdown: kramdown
