@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "ROS Core"
+date:   2019-07-19 15:19:00 +0800
+categories: ROS
+---
+
+ROS Core
+
+wiki: [http://wiki.ros.org/roscore](http://wiki.ros.org/roscore)
+
+ROS Core 由一系列 ROS 节点和相关程序所组成，它是 ROS 系统的基础。
+
+## 1. 启动
+
+当系统中没有 ROS Core 运行时，我们可以通过如下命令启动 ROS Core:
+
+- roscore
+  - roscore:
+
+    ```sh
+    roscore
+    ```
+
+    ```sh
+    # 启动时可指定端口
+    roscore -p 1234
+    ```
+
+- roslaunch
+
+  - roslaunch 只在系统中没有 ROS Core 存在时才启动新 ROS Core
+  - roslaunch 通过 SSH 进行跨主机操作，所以有启动 ROS Core 的能力
+  - wiki: [http://wiki.ros.org/roslaunch](http://wiki.ros.org/roslaunch)
+
+当 ROS Core 启动时，它默认将附带启动：
+
+- ROS Master
+- ROS Parameter Server
+- rosout logging node
+
+更多的启动项可通过配置 **roslaunch/roscore.xml** 文件实现。但要注意，修改此文件将可能影响到之后所有的 roslaunch 命令的运行。
+
+## 2. 环境变量
+
+环境变量 **ROS_MASTER_URI** 用以指定 ROS Master(即: roscore) 的位置:
+
+```sh
+export ROS_MASTER_URI=http://roscore-address-or-ip
+```
+
+```sh
+# 可指定 roscore 的服务端口
+export ROS_MASTER_URI=http://roscore-address-or-ip:1234
+```
+
+不同主机上的 ROS 节点通过此环境变量与 ROS Master 相连。
+
+## 3. 多 ROS Master 系统
+
+关于 multimaster 系统，可参考:
+
+[http://wiki.ros.org/multimaster_fkie](http://wiki.ros.org/multimaster_fkie)
